@@ -1,4 +1,8 @@
 TimeToWords<-function(hours){
+  #funkce TimeToWords prevadi cas zadany v "digitalnim formatu" do slov
+  #vstup..retezec ve formatu '(H)H:MM', hodnoty hodin 0-9 zadavat bez nuly ('1:30', nikoli 01:30)
+  #vystup...retezec, udavajici dany cas v anglicke vete slovne
+  #
   #deklarace promennych
   pocetp=nchar(hours)                                          #pocet znaku ve vstupu
   hodiny_cisla=c('0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24')
@@ -8,7 +12,7 @@ TimeToWords<-function(hours){
   pomocna_cisla=c(0:59)
   pomoc=100
   temp=numeric()
-  chyba='Spatny format vstupu'
+  chyba='Chyba. Spatny format vstupu. Zadavej prosim cas ve formatu (H)H:MM'
   min=""
   hod=""
   # osetreni vstupu:
@@ -34,7 +38,6 @@ TimeToWords<-function(hours){
         spojka='past'
         if (minuty==minuty_cisla[i]){                          #pro dane cislo v minutach pripojuje dane cislo jako string
           min=minuty_slova[i]
-          print(i)
           if (i>2 & i<=15){                                   #pro minuty od :02 do :14 zavadi minutes 
             min=paste(min, "minutes")
           }else if (i>=17 && i<=30){ 
@@ -82,7 +85,7 @@ TimeToWords<-function(hours){
     #vypis casu/chyby
     if (min=="" | hod==""){                               #pokud je promenna min nebo hod prazdna, vyhodi chybu     
       print(chyba)
-    #urceni slovosledu:
+      #urceni slovosledu:
     }else if (min=="o'clock"){                                 
       if (pripona=="AM."){
         print(paste("It's", hod, min))
